@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Enlaces y Accesos Importantes</title>
+    <!-- Estilos externos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>📚 Enlaces y Accesos Importantes</h1>
+            <p>Recopilación de bibliotecas digitales, cursos, herramientas y recursos educativos</p>
+            <div class="badge">📖 <span id="total-enlaces">0</span>+ enlaces · Sin fines de lucro</div>
+        </header>
+
+        <!-- AVISO -->
+        <div class="alert">
+            <strong>🚨 AVISO IMPORTANTE:</strong> Esta recopilación es <strong>SIN FINES DE LUCRO</strong>. Se agradece
+            a todos los autores por compartir su material.
+        </div>
+
+        <!-- NAVEGACIÓN -->
+        <nav class="nav" id="nav-principal">
+            <a href="#seccion-buscadores">🔍 Buscadores</a>
+            <a href="#seccion-cursos">🎓 Cursos</a>
+            <a href="#seccion-libros">📚 Libros</a>
+            <a href="#seccion-programacion">💻 Programación</a>
+            <a href="#seccion-herramientas">🛠️ Herramientas</a>
+            <a href="#seccion-software" class="admin-only" style="display:none;">💿 Software</a>
+            <a href="#seccion-oficios">🔧 Oficios</a>
+            <a href="#seccion-megapacks">📦 Mega Packs</a>
+            <a href="#seccion-comunidad">👥 Comunidad</a>
+            <a href="#seccion-formulario" class="admin">📝 Aportar</a>
+            <a href="#" class="admin" onclick="abrirPanel(event)" id="btn-nav-mipanel">🔒 Mi Panel</a>
+            <!-- Div para insertar botones de secciones dinámicas creadas por el usuario -->
+            <div id="nav-secciones-creadas" style="display:contents;"></div>
+        </nav>
+
+        <!-- OVERLAY DE LOGIN - Mi Panel -->
+        <div id="overlay-login"
+            style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(6px);">
+            <div
+                style="background:#1a1a2e;border-radius:16px;padding:40px 45px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);text-align:center;">
+                <div style="font-size:3.5rem;margin-bottom:15px;">🔒</div>
+                <h2 style="color:white;margin:0 0 8px;font-size:1.4rem;">Acceso restringido</h2>
+                <p style="color:#9aa0a6;margin:0 0 25px;font-size:0.95rem;">Ingresá la contraseña para acceder a Mi
+                    Panel</p>
+                <input type="password" id="input-contrasena" placeholder="Contraseña..."
+                    onkeydown="if(event.key==='Enter') verificarContrasena()"
+                    style="width:100%;padding:13px 16px;border-radius:8px;border:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:white;font-size:1rem;margin-bottom:8px;box-sizing:border-box;outline:none;letter-spacing:3px;">
+                <div id="login-error" style="color:#ef5350;font-size:0.85rem;min-height:20px;margin-bottom:12px;"></div>
+                <div style="display:flex;gap:12px;">
+                    <button onclick="verificarContrasena()"
+                        style="flex:1;background:linear-gradient(135deg,#1a237e,#0d47a1);color:white;border:none;border-radius:8px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer;">✅
+                        Ingresar</button>
+                    <button onclick="cerrarLogin()"
+                        style="background:rgba(255,255,255,0.1);color:white;border:none;border-radius:8px;padding:13px 20px;font-size:1rem;cursor:pointer;">✖</button>
+                </div>
+                <p style="color:rgba(255,255,255,0.25);font-size:0.75rem;margin:18px 0 0;">⚠️ Acceso solo para
+                    administrador</p>
+            </div>
+        </div>
+
+        <!-- BARRA DE BÚSQUEDA GLOBAL -->
+        <div class="search-bar">
+            <input type="text" id="busqueda-global"
+                placeholder="🔍 Buscar enlaces por título, descripción, etiqueta o URL..." oninput="buscarGlobal()">
+            <button onclick="buscarGlobal()">🔍 Buscar</button>
+            <button onclick="limpiarBusquedaGlobal()" style="background:#c62828;">✖ Limpiar</button>
+            <div id="resultados-busqueda-global" class="resultados-busqueda-global"></div>
+        </div>
+
+        <!-- STATS GENERALES -->
+        <div class="stats">
+            <div class="card">
+                <div class="number">10</div>
+                <div class="label">Secciones fijas</div>
+            </div>
+            <div class="card">
+                <div class="number">20+</div>
+                <div class="label">Plataformas cursos</div>
+            </div>
+            <div class="card">
+                <div class="number">∞</div>
+                <div class="label">Libros disponibles</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 1: BUSCADORES -->
+        <!-- ============================================================ -->
+        <section id="seccion-buscadores" class="section">
+            <h2>🔍 BUSCADORES Y WEBS <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div class="alert alert-info"><strong>💡 COMANDO:</strong>
+                <code>site:drive.google.com + [tema] + [PDF|VIDEO]</code></div>
+            <div id="contenedor-buscadores">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando buscadores...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 2: CURSOS -->
+        <!-- ============================================================ -->
+        <section id="seccion-cursos" class="section">
+            <h2>🎓 CURSOS GRATUITOS <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div id="contenedor-cursos">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando cursos...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 3: LIBROS -->
+        <!-- ============================================================ -->
+        <section id="seccion-libros" class="section">
+            <h2>📚 LIBROS POR CATEGORÍA <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div id="contenedor-libros">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando libros...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 4: PROGRAMACIÓN -->
+        <!-- ============================================================ -->
+        <section id="seccion-programacion" class="section">
+            <h2>💻 PROGRAMACIÓN Y DESARROLLO <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div class="alert alert-info">📌 <strong>Recursos de programación:</strong> Cursos, libros, ejercicios, APIs
+                y herramientas para desarrolladores.</div>
+            <div id="contenedor-programacion">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando programación...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 5: HERRAMIENTAS -->
+        <!-- ============================================================ -->
+        <section id="seccion-herramientas" class="section">
+            <h2>🛠️ HERRAMIENTAS Y RECURSOS <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div class="alert alert-info">📌 <strong>Todas las herramientas y recursos clasificados.</strong></div>
+            <div id="contenedor-herramientas">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando herramientas...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 6: SOFTWARE -->
+        <!-- ============================================================ -->
+        <section id="seccion-software" class="section admin-only" style="display:none;">
+            <h2>💿 SOFTWARE Y PROGRAMAS <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div id="contenedor-software">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando software...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 7: OFICIOS -->
+        <!-- ============================================================ -->
+        <section id="seccion-oficios" class="section">
+            <h2>🔧 OFICIOS Y TALLERES <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div class="alert alert-info">📌 <strong>Recursos:</strong> Soldadura, cerrajería, electrónica, reparación
+                de electrodomésticos y computadoras, carpintería, etc.</div>
+            <div id="contenedor-oficios">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando oficios...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 8: MEGA PACKS -->
+        <!-- ============================================================ -->
+        <section id="seccion-megapacks" class="section">
+            <h2>📦 MEGA PACKS <span class="count">0 enlaces</span> <a href="#nav-principal" class="btn-volver-inicio">🏠
+                    Inicio</a></h2>
+            <div id="contenedor-megapacks">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando mega packs...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 9: COMUNIDAD -->
+        <!-- ============================================================ -->
+        <section id="seccion-comunidad" class="section">
+            <h2>👥 GRUPOS DE COMUNIDAD <span class="count">0 enlaces</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div id="contenedor-comunidad">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando comunidad...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN 10: APORTAR -->
+        <!-- ============================================================ -->
+        <section id="seccion-formulario" class="section">
+            <h2>📝 APORTAR ENLACES <span class="count">Colabora</span> <a href="#nav-principal"
+                    class="btn-volver-inicio">🏠 Inicio</a></h2>
+            <div class="alert alert-success">🌱 <strong>¡Ayuda a crecer esta biblioteca!</strong> Si conoces más
+                recursos, libros o cursos, compártelos usando el formulario.</div>
+            <div id="contenedor-formulario">
+                <p style="color:#666;text-align:center;padding:20px;">Cargando aportes...</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- MI PANEL - ADMINISTRACIÓN -->
+        <!-- ============================================================ -->
+        <section id="seccion-mipanel" class="section admin-panel" style="display:none;">
+            <div
+                style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:15px;">
+                <h2 style="margin:0;">🔓 MI PANEL DE ADMINISTRACIÓN <span class="count"
+                        style="background:#2e7d32;color:white;">Sesión activa</span></h2>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <a href="#nav-principal" class="btn-volver-inicio" style="background:#2e7d32;">🏠 Inicio</a>
+                    <button onclick="cerrarPanel()"
+                        style="background:#c62828;color:white;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;font-weight:600;font-size:0.9rem;">🔒
+                        Cerrar sesión</button>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="border-left-color: #2e7d32;">
+                <strong>🔒 ESTA PESTAÑA ES SOLO PARA TI:</strong><br>
+                Aquí puedes <strong>agregar</strong> enlaces a cualquier sección, <strong>crear nuevas
+                    secciones</strong> y <strong>eliminar</strong> enlaces existentes.
+            </div>
+
+            <!-- CONTADORES -->
+            <div class="admin-stats">
+                <div class="stat-card stat-green">
+                    <div class="number" id="contador-enlaces">0</div>
+                    <div class="label">Enlaces agregados</div>
+                </div>
+                <div class="stat-card stat-blue">
+                    <div class="number" id="contador-categorias">0</div>
+                    <div class="label">Categorías creadas</div>
+                </div>
+                <div class="stat-card stat-orange">
+                    <div class="number" id="ultima-actualizacion">-</div>
+                    <div class="label">Última actualización</div>
+                </div>
+                <div class="stat-card stat-red">
+                    <div class="number" id="contador-eliminados">0</div>
+                    <div class="label">Enlaces ocultos</div>
+                </div>
+            </div>
+
+            <!-- FORMULARIO PARA AGREGAR -->
+            <div class="admin-form">
+                <h3 id="titulo-formulario" style="margin-top:0;color:#2e7d32;">✏️ Agregar nuevo enlace</h3>
+                <div class="grid-2">
+                    <div>
+                        <label>📂 Sección donde aparecerá *</label>
+                        <select id="seccion-destino" onchange="actualizarCategorias()">
+                            <option value="buscadores">🔍 Buscadores</option>
+                            <option value="cursos">🎓 Cursos</option>
+                            <option value="libros" selected>📚 Libros</option>
+                            <option value="programacion">💻 Programación</option>
+                            <option value="herramientas">🛠️ Herramientas</option>
+                            <option value="software">💿 Software</option>
+                            <option value="oficios">🔧 Oficios</option>
+                            <option value="megapacks">📦 Mega Packs</option>
+                            <option value="comunidad">👥 Comunidad</option>
+                            <option value="formulario">📝 Aportar</option>
+                            <option value="+nueva">➕ Crear nueva sección</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>📂 Categoría *</label>
+                        <select id="categoria-destino" onchange="mostrarInputCategoria()">
+                            <!-- Se llena dinámicamente con JavaScript -->
+                        </select>
+                        <input type="text" id="nueva-categoria-input"
+                            placeholder="Escribe el nombre de la nueva categoría..." class="oculto"
+                            style="margin-top:8px;">
+                        <small>Selecciona una categoría existente o elige "➕ Crear nueva categoría"</small>
+                    </div>
+                    <div>
+                        <label>📌 Título *</label>
+                        <input type="text" id="nuevo-titulo" placeholder="Ej: Curso de Python desde cero">
+                    </div>
+                    <div>
+                        <label>🔗 Enlace *</label>
+                        <input type="url" id="nuevo-enlace" placeholder="https://ejemplo.com/curso">
+                    </div>
+                    <div class="grid-full">
+                        <label>📝 Descripción</label>
+                        <textarea id="nueva-descripcion" rows="2" placeholder="Breve descripción..."></textarea>
+                    </div>
+                    <div class="grid-full">
+                        <label>🏷️ Etiquetas (separadas por comas)</label>
+                        <input type="text" id="nuevas-etiquetas" placeholder="python, curso, gratis">
+                    </div>
+                </div>
+                <div id="botones-formulario-container" style="display:flex;gap:12px;margin-top:15px;flex-wrap:wrap;">
+                    <button id="btn-agregar-enlace" onclick="agregarEnlace()" class="btn-success"
+                        style="padding:12px 30px;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;">➕
+                        Agregar Enlace</button>
+                    <button onclick="limpiarFormulario()" class="btn-gray"
+                        style="padding:12px 30px;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;">🧹
+                        Limpiar</button>
+                </div>
+            </div>
+
+            <!-- BUSCADOR Y ELIMINADOR -->
+            <div class="buscar-eliminar">
+                <h3 style="margin-top:0;color:#c62828;">🗑️ Buscar y eliminar enlaces</h3>
+                <div class="grid-2">
+                    <div class="grid-full">
+                        <label>🔍 Buscar enlace</label>
+                        <input type="text" id="buscar-enlace"
+                            placeholder="Buscar por título, categoría, URL o descripción..." oninput="buscarEnlaces()">
+                    </div>
+                    <div>
+                        <label>📂 Sección</label>
+                        <select id="buscar-seccion">
+                            <option value="todas">Todas las secciones</option>
+                            <option value="buscadores">🔍 Buscadores</option>
+                            <option value="cursos">🎓 Cursos</option>
+                            <option value="libros">📚 Libros</option>
+                            <option value="programacion">💻 Programación</option>
+                            <option value="herramientas">🛠️ Herramientas</option>
+                            <option value="software">💿 Software</option>
+                            <option value="oficios">🔧 Oficios</option>
+                            <option value="megapacks">📦 Mega Packs</option>
+                            <option value="comunidad">👥 Comunidad</option>
+                            <option value="formulario">📝 Aportar</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>📂 Categoría</label>
+                        <select id="buscar-categoria" onchange="buscarEnlaces()">
+                            <option value="todas">Todas las categorías</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="resultados-busqueda" class="resultados-busqueda">
+                    <p style="color:#666;text-align:center;padding:20px;">Escribe algo en el buscador para encontrar
+                        enlaces.</p>
+                </div>
+            </div>
+
+            <!-- GUARDAR PERMANENTE -->
+            <div
+                style="background:linear-gradient(135deg,#1b5e20,#2e7d32);border-radius:12px;padding:20px 25px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;">
+                <div>
+                    <h3 style="margin:0;color:white;font-size:1.1rem;">💾 Guardar cambios permanentes en el archivo</h3>
+                    <p style="margin:6px 0 0;color:#c8e6c9;font-size:0.9rem;">Genera un nuevo <code
+                            style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:4px;">data.js</code> con
+                        todos tus enlaces incluidos. Reemplazá el archivo en la carpeta para que sean permanentes.</p>
+                </div>
+                <button onclick="guardarPermanente()"
+                    style="background:white;color:#1b5e20;padding:12px 28px;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:1rem;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.2);">💾
+                    Generar archivo data.js</button>
+            </div>
+
+            <!-- LISTA DE ENLACES AGREGADOS POR EL USUARIO -->
+            <div class="admin-list">
+                <div class="admin-list-header">
+                    <h3>📋 Mis enlaces agregados</h3>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <button onclick="exportarMisEnlaces()"
+                            style="background:#1a237e;color:white;padding:8px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">⬇️
+                            Exportar CSV</button>
+                        <button onclick="limpiarPantallaMisEnlaces()"
+                            style="background:#c62828;color:white;padding:8px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🧹
+                            Limpiar pantalla</button>
+                        <button onclick="recargarTodo()"
+                            style="background:#ff6f00;color:white;padding:8px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🔄
+                            Recargar</button>
+                    </div>
+                </div>
+                <div id="lista-enlaces">
+                    <p class="empty">No has agregado ningún enlace aún. Usa el formulario de arriba para empezar.</p>
+                </div>
+            </div>
+
+            <!-- LISTA DE ENLACES REPORTADOS COMO CAÍDOS -->
+            <div class="admin-list" style="margin-top: 20px; border-color: #c62828;">
+                <div class="admin-list-header">
+                    <h3 style="color:#c62828;">🚨 Reportes de Enlaces Caídos</h3>
+                    <button onclick="limpiarTodosLosReportes()"
+                        style="background:#c62828;color:white;padding:8px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🗑️
+                        Limpiar reportes</button>
+                </div>
+                <div id="lista-reportes">
+                    <p class="empty">No hay reportes de enlaces caídos.</p>
+                </div>
+            </div>
+
+            <div class="admin-instructions">
+                <h4>💡 ¿Cómo funciona?</h4>
+                <ul>
+                    <li><strong>Agregar:</strong> Selecciona una sección, elige o crea una categoría, completa los datos
+                        y el enlace aparecerá automáticamente.</li>
+                    <li><strong>Crear sección:</strong> Selecciona "➕ Crear nueva sección", escribe el nombre y se
+                        creará con su botón en el navegador.</li>
+                    <li><strong>Crear categoría:</strong> Selecciona "➕ Crear nueva categoría", escribe el nombre y se
+                        creará en la sección actual.</li>
+                    <li><strong>Buscar y eliminar:</strong> Usa el formulario "Buscar y eliminar enlaces". Escribe en el
+                        buscador para encontrar cualquier enlace y haz clic en 🗑️ para eliminarlo.</li>
+                    <li><strong>💾 Guardar permanente:</strong> Descarga un <code>data.js</code> actualizado. Copialo a
+                        la carpeta <em>Biblioteca</em> reemplazando el anterior → ¡tus enlaces quedan en el archivo para
+                        siempre!</li>
+                    <li><strong>🧹 Limpiar pantalla:</strong> Limpia únicamente la vista de la sección "Mis enlaces
+                        agregados" para despejar la pantalla. Los enlaces se mantienen guardados permanentemente.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: REPORTAR ENLACE CAÍDO -->
+        <!-- ============================================================ -->
+        <section id="seccion-reportar" class="section" style="border-left: 5px solid #c62828;">
+            <h2>🚨 Reportar Enlace Caído <a href="#nav-principal" class="btn-volver-inicio"
+                    style="background:#c62828;">🏠 Inicio</a></h2>
+            <div class="alert alert-info" style="border-left-color: #c62828; background-color: #ffebee;">
+                <strong>💡 ¿Encontraste un enlace roto?</strong> Ayúdanos a mantener la biblioteca en funcionamiento.
+                Completa este breve formulario y revisaremos el reporte lo antes posible.
+            </div>
+            <div class="admin-form" style="border-color: #c62828; background: #fffafb;">
+                <form id="form-reportar" onsubmit="enviarReporte(event)">
+                    <div class="grid-2">
+                        <div>
+                            <label>🔗 Enlace roto (URL) *</label>
+                            <input type="url" id="reporte-enlace" placeholder="https://ejemplo.com/enlace-roto" required
+                                style="border-color: #ffcdd2;">
+                        </div>
+                        <div>
+                            <label>📌 Título del recurso o sección (opcional)</label>
+                            <input type="text" id="reporte-titulo"
+                                placeholder="Ej: Manual de Soldadura / Sección Oficios" style="border-color: #ffcdd2;">
+                        </div>
+                        <div class="grid-full">
+                            <label>⚠️ Motivo del problema *</label>
+                            <select id="reporte-motivo" required style="border-color: #ffcdd2;">
+                                <option value="caido" selected>El enlace está caído / Archivo eliminado (Error 404)
+                                </option>
+                                <option value="incorrecto">El enlace redirige a un sitio web incorrecto o malicioso
+                                </option>
+                                <option value="calidad">El archivo está dañado, protegido con contraseña o incompleto
+                                </option>
+                                <option value="otro">Otro problema (Especificar en detalles)</option>
+                            </select>
+                        </div>
+                        <div class="grid-full">
+                            <label>💬 Detalles adicionales (opcional)</label>
+                            <textarea id="reporte-detalles" rows="3"
+                                placeholder="Si tienes más información o un enlace alternativo que funcione, escríbelo aquí..."
+                                style="border-color: #ffcdd2;"></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <button type="submit" class="btn-danger"
+                            style="padding:12px 30px;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;background:#c62828;">🚀
+                            Enviar Reporte</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: COLABORAR / DONACIÓN -->
+        <!-- ============================================================ -->
+        <section id="seccion-colaborar" class="section"
+            style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); border: 2px solid #ff9800; margin-bottom: 25px;">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 20px 10px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🌱</div>
+                <h2
+                    style="color: #e65100; border-bottom: none; display: block; text-align: center; margin-bottom: 12px; font-size: 1.8rem; font-weight: 700;">
+                    ¿Este material te ha sido de utilidad?
+                </h2>
+                <p style="font-size: 1.05rem; color: #4e342e; line-height: 1.7; margin-bottom: 20px; font-weight: 500;">
+                    Mantener este espacio libre de publicidad, revisar y actualizar constantemente los enlaces, y buscar
+                    material de calidad requiere horas de trabajo voluntario y costos de infraestructura.
+                </p>
+                <p style="font-size: 1rem; color: #5d4037; line-height: 1.7; margin-bottom: 25px;">
+                    Si el material te sirvió para estudiar, trabajar o aprender un nuevo oficio, <strong>tu colaboración
+                        nos ayuda a seguir adelante</strong>. Con tu aporte, podremos continuar ampliando y protegiendo
+                    esta recopilación de conocimiento libre para todos.
+                </p>
+
+                <!-- Botones de donación premium -->
+                <div style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 15px;">
+                    <!-- Mercado Pago Alias -->
+                    <div style="background: rgba(255, 255, 255, 0.7); padding: 10px 20px; border-radius: 30px; display: inline-flex; align-items: center; gap: 12px; border: 1px solid #ffcc80; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <span style="font-size: 1.1rem;">💸</span>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.75rem; font-weight: 700; color: #e65100; text-transform: uppercase;">Mercado Pago (Alias)</div>
+                            <div style="font-size: 0.95rem; font-weight: 700; color: #3e2723; font-family: monospace;" id="alias-mp">nancyeliscardozo.mp</div>
+                        </div>
+                        <button onclick="copiarAlias()" style="background: #e65100; color: white; border: none; border-radius: 15px; padding: 4px 12px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: background 0.2s;">📋 Copiar</button>
+                    </div>
+
+                    <!-- Paypal Button -->
+                    <a href="https://www.paypal.com/donate/?hosted_button_id=K47TVV99SBN8N" target="_blank"
+                        style="display: inline-flex; align-items: center; gap: 10px; background: #003087; color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s;">
+                        💳 PayPal (Tarjeta / Saldo)
+                    </a>
+
+                    <!-- Notificar por correo -->
+                    <a href="mailto:nanchuelis@gmail.com?subject=Donaci%C3%B3n%20para%20la%20Biblioteca&body=Hola%20Nancy%2C%20he%20realizado%20una%20colaboraci%C3%B3n%20para%20apoyar%20el%20proyecto%20de%20la%20Biblioteca%20desde%20la%20web.%20%C2%A1Muchas%20gracias%20por%20la%20recopilaci%C3%B3n%21"
+                        style="display: inline-flex; align-items: center; gap: 10px; background: #2e7d32; color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s;">
+                        ✉️ Avisar Donación
+                    </a>
+                </div>
+                <p style="font-size: 0.85rem; color: #5d4037; margin-top: 10px;">
+                    💡 <em>Nota: PayPal y Mercado Pago te enviarán un comprobante. A su vez, nos llegará un aviso automático al correo <strong>nanchuelis@gmail.com</strong> para registrar tu valioso aporte. ¡Muchísimas gracias! ❤️</em>
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <p>📚 <strong>Enlaces y Accesos Importantes</strong> — Recopilación sin fines de lucro<br>
+                Se agradece a todos los autores por compartir su material.<br>
+                ¿Enlace caído? <a href="#seccion-reportar">Repórtalo aquí</a></p>
+            <p style="margin-top:10px;font-size:0.8rem;color:#9aa0a6;">Última actualización: Julio 2026 · 500+ enlaces ·
+                10 secciones fijas</p>
+        </footer>
+
+    </div> <!-- Fin container -->
+
+    <!-- Scripts de datos y lógica -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
