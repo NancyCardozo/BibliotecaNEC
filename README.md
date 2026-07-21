@@ -9,7 +9,6 @@ Una recopilación moderna, organizada y responsiva de bibliotecas digitales, cur
 *   **🔍 Buscador Global en Tiempo Real:** Filtra instantáneamente enlaces por título, descripción, etiquetas o URL desde una barra de búsqueda inteligente.
 *   **📊 Estadísticas Dinámicas:** Indicadores visuales en la cabecera que muestran el volumen de recursos disponibles.
 *   **🔒 Mi Panel (Panel de Administración):**
-    *   Acceso restringido protegido por contraseña (clave por defecto para demostración/administración: `NECADM123`).
     *   Permite a los administradores agregar nuevos enlaces dinámicamente y crear nuevas secciones personalizadas sobre la marcha.
 *   **📱 Diseño Premium y Responsivo (Mobile-First):** Interfaz limpia, con un estilo moderno y oscuro (glassmorphism/dark mode), tipografías cuidadas y microinteracciones fluidas adaptables a cualquier dispositivo.
 *   **📂 Organización Temática Completa:**
